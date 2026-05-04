@@ -3,7 +3,6 @@
 "use client";
 
 import LogoutButton from "@/components/auth/LogoutButton";
-import { useRouter } from "next/router";
 
 interface DashboardHeaderProps {
   userName?: string;

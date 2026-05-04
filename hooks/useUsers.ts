@@ -55,7 +55,7 @@ export function useUsers(options: UseUsersOptions = {}) {
         order,
       };
 
-      const queryString = buildQueryString(params);
+      const queryString = buildQueryString(params as Record<string, unknown>);
       const response = await apiGet<UsersListResponse>(
         `/api/users?${queryString}`,
       );

@@ -9,7 +9,7 @@ import { TablePagination } from "@/components/table/TablePagination";
 import { TableToolbar } from "@/components/table/TableToolbar";
 import { useUsers } from "@/hooks/useUsers";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 const columns: ColumnDef<User>[] = [
   {
@@ -24,7 +24,7 @@ const columns: ColumnDef<User>[] = [
       </button>
     ),
     cell: (info) => (
-      <span className="font-mono text-xs">{info.getValue()}</span>
+      <span className="font-mono text-xs">{info.getValue() as ReactNode}</span>
     ),
   },
   {
@@ -38,7 +38,9 @@ const columns: ColumnDef<User>[] = [
         <span className="text-xs">↕</span>
       </button>
     ),
-    cell: (info) => <span className="font-medium">{info.getValue()}</span>,
+    cell: (info) => (
+      <span className="font-medium">{info.getValue() as ReactNode}</span>
+    ),
   },
   {
     accessorKey: "email",
@@ -51,12 +53,16 @@ const columns: ColumnDef<User>[] = [
         <span className="text-xs">↕</span>
       </button>
     ),
-    cell: (info) => <span className="text-blue-600">{info.getValue()}</span>,
+    cell: (info) => (
+      <span className="text-blue-600">{info.getValue() as ReactNode}</span>
+    ),
   },
 ];
 
 // Placeholder for sorting (will be handled in component)
 function handleSort(column: string, col: any) {
+  console.log("Sorting by", column);
+  console.log("Column:", col);
   // This is called from column header clicks
 }
 
@@ -109,10 +115,10 @@ export function UserTableContainer() {
     router.push(newUrl);
   }, [page, limit, search, sortBy, order, router]);
 
-  const enhancedColumns: ColumnDef<User>[] = columns.map((col) => ({
+  const enhancedColumns = columns.map((col) => ({
     ...col,
     header: (headerContext) => {
-      const columnId = col.accessorKey as string;
+      const columnId = col.id as any;
       return (
         <button
           className="flex items-center gap-2 hover:text-blue-600 transition-colors font-medium"
@@ -143,7 +149,7 @@ export function UserTableContainer() {
       />
 
       <DataTable
-        columns={enhancedColumns}
+        columns={enhancedColumns as any}
         data={users}
         isLoading={loading}
         error={error}

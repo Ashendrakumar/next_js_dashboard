@@ -1,46 +1,51 @@
 // components/ui/Button.tsx
 
-import { cn } from '@/lib/utils';
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { cn } from "@/lib/utils";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "danger" | "ghost";
+  size?: "sm" | "md" | "lg";
   loading?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading = false, disabled, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = "primary",
+      size = "md",
+      loading = false,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
     const baseStyles =
-      'btn-admin transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0f172a] disabled:opacity-50 disabled:cursor-not-allowed';
+      "btn-admin transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0f172a] disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants = {
       primary:
-        'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-500',
+        "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-500",
       secondary:
-        'bg-[#334155] text-[#f1f5f9] hover:bg-[#475569] border border-[#475569] focus:ring-blue-500',
+        "bg-[#334155] text-[#f1f5f9] hover:bg-[#475569] border border-[#475569] focus:ring-blue-500",
       danger:
-        'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500',
+        "bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500",
       ghost:
-        'bg-transparent text-[#cbd5e1] hover:bg-[#1e293b] focus:ring-blue-500',
+        "bg-transparent text-[#cbd5e1] hover:bg-[#1e293b] focus:ring-blue-500",
     };
 
     const sizes = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2 text-base',
-      lg: 'px-6 py-3 text-lg',
+      sm: "px-3 py-1.5 text-sm",
+      md: "px-4 py-2 text-base",
+      lg: "px-6 py-3 text-lg",
     };
 
     return (
       <button
         ref={ref}
         disabled={disabled || loading}
-        className={cn(
-          baseStyles,
-          variants[variant],
-          sizes[size],
-          className
-        )}
+        className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >
         {loading && (
@@ -68,9 +73,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {props.children}
       </button>
     );
-  }
+  },
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 export default Button;

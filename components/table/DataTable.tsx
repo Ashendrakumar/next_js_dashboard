@@ -6,11 +6,9 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  Row,
   ColumnDef,
 } from "@tanstack/react-table";
 import { User } from "@/types/user";
-import { cn } from "@/lib/utils";
 
 interface DataTableProps {
   columns: ColumnDef<User>[];

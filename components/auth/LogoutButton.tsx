@@ -1,11 +1,11 @@
 // components/auth/LogoutButton.tsx
 
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import Button from '@/components/ui/Button';
-import { apiPost } from '@/lib/api';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Button from "@/components/ui/Button";
+import { apiPost } from "@/lib/api";
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -15,15 +15,15 @@ export default function LogoutButton() {
     try {
       setIsLoading(true);
 
-      await apiPost('/api/logout');
+      await apiPost("/api/logout");
 
       // Redirect to login
-      router.push('/login');
+      router.push("/login");
       router.refresh();
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error("Logout failed:", error);
       // Still redirect even if logout fails
-      router.push('/login');
+      router.push("/login");
       router.refresh();
     } finally {
       setIsLoading(false);

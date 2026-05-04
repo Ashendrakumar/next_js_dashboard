@@ -62,7 +62,7 @@ export default function LoginForm() {
         // Then redirect to dashboard
         router.push("/dashboard");
       } else {
-        setApiError(response.error || "Login failed");
+        setApiError(response.success || "Login failed");
       }
     } catch (error) {
       setApiError(
