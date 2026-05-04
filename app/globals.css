@@ -1,0 +1,145 @@
+/* app/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color Variables for Dark Bluish Admin Theme */
+:root {
+  --color-bg-primary: #0f172a; /* Very dark blue */
+  --color-bg-secondary: #1e293b; /* Dark slate blue */
+  --color-bg-tertiary: #334155; /* Medium slate blue */
+  --color-text-primary: #f1f5f9; /* Light text */
+  --color-text-secondary: #cbd5e1; /* Medium text */
+  --color-border: #475569; /* Border color */
+  --color-accent: #3b82f6; /* Blue accent */
+  --color-accent-hover: #2563eb; /* Darker blue on hover */
+  --color-success: #10b981; /* Green success */
+  --color-error: #ef4444; /* Red error */
+  --color-warning: #f59e0b; /* Orange warning */
+}
+
+@layer base {
+  body {
+    @apply bg-[#0f172a] text-[#f1f5f9];
+  }
+
+  /* Remove default margins */
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-blue-600 text-white;
+  }
+}
+
+@layer components {
+  /* Dark theme card style */
+  .glass-card {
+    @apply bg-[#1e293b] border border-[#475569] rounded-lg shadow-lg;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  /* Input focus style for dark theme */
+  .input-dark {
+    @apply bg-[#1e293b] text-[#f1f5f9] border border-[#475569];
+  }
+
+  .input-dark:focus {
+    @apply outline-none ring-2 ring-blue-500 border-transparent;
+  }
+
+  /* Admin button base */
+  .btn-admin {
+    @apply inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0f172a];
+  }
+
+  /* Secondary text */
+  .text-secondary {
+    @apply text-[#cbd5e1];
+  }
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #334155 25%,
+    #475569 50%,
+    #334155 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Smooth fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Pulse animation for dark theme */
+@keyframes pulse-dark {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse {
+  animation: pulse-dark 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-[#0f172a];
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#1e293b];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#475569] rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#64748b];
+}
