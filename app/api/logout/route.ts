@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClearAuthCookie } from "@/lib/auth";
+export const dynamic = "force-dynamic";
 
 // ✅ handle preflight
 export async function OPTIONS() {

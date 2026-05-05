@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { generateToken, createAuthCookie } from "@/lib/auth";
 import { LoginRequest, LoginResponse } from "@/types/auth";
 import { DEMO_CREDENTIALS } from "@/lib/constants";
+export const dynamic = "force-dynamic";
 
 export async function OPTIONS() {
   return new Response(null, {
