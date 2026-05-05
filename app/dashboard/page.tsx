@@ -8,6 +8,9 @@ export const metadata = {
   description: "User management dashboard",
 };
 
+// Disable static generation for this page (requires auth)
+export const dynamic = "force-dynamic";
+
 export default function DashboardPage() {
   return (
     <div className="space-y-6">

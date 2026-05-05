@@ -8,6 +8,9 @@ export const metadata = {
   description: "User profile page",
 };
 
+// Disable static generation for this page (requires auth)
+export const dynamic = "force-dynamic";
+
 export default function ProfilePage() {
   return (
     <div className="space-y-6">
