@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   poweredByHeader: false,
+  crossOrigin: "anonymous",
 
   // Security headers - minimal to avoid conflicts
   async headers() {
@@ -51,9 +52,9 @@ const nextConfig = {
   },
 
   // Middleware configuration
-  experimental: {
-    allowMiddlewareResponseBody: true,
-  },
+  // experimental: {
+  //   allowMiddlewareResponseBody: true,
+  // },
 };
 
 module.exports = nextConfig;
