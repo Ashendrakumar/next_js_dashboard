@@ -22,8 +22,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value:
-              "https://next-js-dashboard-lqn7oewv6-ashendrakumars-projects.vercel.app",
+            value: "*",
           },
           {
             key: "Access-Control-Allow-Methods",
