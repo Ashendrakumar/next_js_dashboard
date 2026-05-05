@@ -19,21 +19,19 @@ const nextConfig = {
             key: "X-Frame-Options",
             value: "SAMEORIGIN",
           },
+          { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value:
+              "https://next-js-dashboard-lqn7oewv6-ashendrakumars-projects.vercel.app",
           },
           {
             key: "Access-Control-Allow-Methods",
-            value: "GET,POST,PUT,DELETE,OPTIONS",
+            value: "GET,DELETE,PATCH,POST,PUT",
           },
           {
             key: "Access-Control-Allow-Headers",
-            value: "Content-Type, Authorization",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "no-referrer",
+            value: "X-CSRF-Token, X-Requested-With, Accept, Content-Type",
           },
         ],
       },
