@@ -1,29 +1,42 @@
 // app/api/login/route.ts
 
-import { NextRequest, NextResponse } from 'next/server';
-import { generateToken, createAuthCookie } from '@/lib/auth';
-import { LoginRequest, LoginResponse } from '@/types/auth';
-import { DEMO_CREDENTIALS } from '@/lib/constants';
+import { NextRequest, NextResponse } from "next/server";
+import { generateToken, createAuthCookie } from "@/lib/auth";
+import { LoginRequest, LoginResponse } from "@/types/auth";
+import { DEMO_CREDENTIALS } from "@/lib/constants";
 
-export async function POST(request: NextRequest): Promise<NextResponse<LoginResponse>> {
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
+
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<LoginResponse>> {
   try {
     const body: LoginRequest = await request.json();
 
-    // Validate input
     if (!body.email || !body.password) {
       return NextResponse.json(
         {
           success: false,
-          token: '',
-          user: { id: '', email: '', name: '' },
-          error: 'Email and password are required',
+          token: "",
+          user: { id: "", email: "", name: "" },
+          error: "Email and password are required",
         },
-        { status: 400 }
+        {
+          status: 400,
+          headers: corsHeaders(),
+        },
       );
     }
 
-    // Mock authentication
-    // In production: hash password with bcrypt and check against database
     if (
       body.email !== DEMO_CREDENTIALS.email ||
       body.password !== DEMO_CREDENTIALS.password
@@ -31,22 +44,23 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
       return NextResponse.json(
         {
           success: false,
-          token: '',
-          user: { id: '', email: '', name: '' },
-          error: 'Invalid email or password',
+          token: "",
+          user: { id: "", email: "", name: "" },
+          error: "Invalid email or password",
         },
-        { status: 401 }
+        {
+          status: 401,
+          headers: corsHeaders(),
+        },
       );
     }
 
-    // Create mock user (in production, fetch from database)
     const user = {
-      id: '1',
+      id: "1",
       email: body.email,
-      name: 'Demo User',
+      name: "Demo User",
     };
 
-    // Generate JWT token
     const token = generateToken(user);
 
     const response = NextResponse.json(
@@ -55,23 +69,36 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
         token,
         user,
       },
-      { status: 200 }
+      {
+        status: 200,
+        headers: corsHeaders(),
+      },
     );
 
-    // Set authentication cookie (HTTP-only, secure)
-    response.headers.set('Set-Cookie', createAuthCookie(token));
+    response.headers.set("Set-Cookie", createAuthCookie(token));
 
     return response;
   } catch (error) {
-    console.error('Login error:', error);
     return NextResponse.json(
       {
         success: false,
-        token: '',
-        user: { id: '', email: '', name: '' },
-        error: 'An error occurred during login',
+        token: "",
+        user: { id: "", email: "", name: "" },
+        error: "An error occurred during login",
       },
-      { status: 500 }
+      {
+        status: 500,
+        headers: corsHeaders(),
+      },
     );
   }
+}
+
+// ✅ Reusable CORS headers
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
 }
