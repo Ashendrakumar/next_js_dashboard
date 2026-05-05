@@ -4,27 +4,19 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
 
-  // Add security headers
+  // Security headers - minimal to avoid conflicts
   async headers() {
     return [
       {
         source: "/:path*",
         headers: [
           {
-            key: "X-Frame-Options",
-            value: "DENY",
-          },
-          {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
           },
         ],
       },
@@ -40,6 +32,11 @@ const nextConfig = {
         permanent: false,
       },
     ];
+  },
+
+  // Middleware configuration
+  experimental: {
+    allowMiddlewareResponseBody: true,
   },
 };
 
